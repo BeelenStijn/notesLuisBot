@@ -104,6 +104,9 @@ bot.dialog('CancelDialog',
 var createNote = require('./dialogs/note/createNote');
 var deleteNote = require('./dialogs/note/deleteNote');
 var readNote = require('./dialogs/note/readNote');
+var createContact = require('./dialogs/contact/createContact');
+var deleteContact = require('./dialogs/contact/deleteContact');
+var readContact = require('./dialogs/contact/readContact');
 
 // CreateNote dialog
 bot.dialog('CreateNote', createNote)
@@ -126,8 +129,20 @@ bot.dialog('DeleteNote', deleteNote)
 });
 
 // Read note dialog
-bot.dialog('ReadNote', readNote).triggerAction({
+bot.dialog('ReadNote', readNote)
+.triggerAction({
     matches: 'Note.ReadAloud'
-}).cancelAction('cancelReadNote', "Ok.", {
+})
+.cancelAction('cancelReadNote', "Ok.", {
     matches: /^(cancel|nevermind)/i
+});
+
+// Create contact dialog
+bot.dialog('createContact', createContact)
+.triggerAction({
+    matches: 'Note.Create'
+})
+.cancelAction('cancelCreateContact', "Contact canceled.", {
+    matches: /^(cancel|nevermind)/i,
+    confirmPrompt: "Are you sure?"
 });
