@@ -35,7 +35,7 @@ module.exports =  [
     function (session, results) {
         var contact = session.dialogData.contact;
         if (results.response) {
-            note.text = results.response;
+            contact.number = results.response;
         }
 
         // If the object for storing contacts in session.userData doesn't exist yet, initialize it

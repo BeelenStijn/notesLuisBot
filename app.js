@@ -140,7 +140,8 @@ bot.dialog('ReadNote', readNote)
 // Create contact dialog
 bot.dialog('createContact', createContact)
 .triggerAction({
-    matches: 'Contact.Create'
+    matches: 'Contact.Create',
+    confirmPrompt: "This will cancel the creation of the contact you started. Are you sure?" 
 })
 .cancelAction('cancelCreateContact', "Contact canceled.", {
     matches: /^(cancel|nevermind)/i,
