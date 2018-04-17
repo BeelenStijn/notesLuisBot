@@ -1,6 +1,9 @@
 /*-----------------------------------------------------------------------------
 A simple Language Understanding (LUIS) bot for the Microsoft Bot Framework. 
 -----------------------------------------------------------------------------*/
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').load();
+}
 
 var restify = require('restify');
 var builder = require('botbuilder');
@@ -36,10 +39,9 @@ var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azu
 // This default message handler is invoked if the user's utterance doesn't
 // match any intents handled by other dialogs.
 var bot = new builder.UniversalBot(connector, function (session, args) {
-    
-    // NEW CODE
-    
-    
+
+    //NEW CODE
+
    session.send("Hi... I'm the note bot sample. I can create new notes, read saved notes to you and delete notes.");
 
    // If the object for storing notes in session.userData doesn't exist yet, initialize it
@@ -65,6 +67,7 @@ var luisAPIKey = process.env.LuisAPIKey;
 var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
 
 const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v2.0/apps/' + luisAppId + '?subscription-key=' + luisAPIKey;
+//const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/88c1bfea-58e8-41cb-9a47-6660f6c01360?subscription-key=3ecdb93e6ba04a0187d3b05c95259381&verbose=true&timezoneOffset=0&q='
 
 // Create a recognizer that gets intents from LUIS, and add it to the bot
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);

@@ -3,7 +3,7 @@ var helper = require('../../helper/helper');
 
 module.exports = [
     function (session, args, next) {
-        if (helper.noteCount(session.userData.notes) > 0) {
+        if (helper.count(session.userData.notes) > 0) {
            
             // Resolve and store any Note.Title entity passed from LUIS.
             var title;
