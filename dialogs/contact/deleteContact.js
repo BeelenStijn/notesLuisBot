@@ -16,7 +16,7 @@ module.exports = [
 
             //promt for contact name
             if (!name) {
-                builder.Prompts.choice(session, 'Which contact would you like to read?', session.userData.contacts);
+                builder.Prompts.choice(session, 'Which contact would you like to delete?', session.userData.contacts);
             } else {
                 next({ response: title });
             }
