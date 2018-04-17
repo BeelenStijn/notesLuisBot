@@ -150,3 +150,13 @@ bot.dialog('createContact', createContact)
     matches: /^(cancel|nevermind)/i,
     confirmPrompt: "Are you sure?"
 });
+
+// Read contact dialog
+bot.dialog('readContact', readContact)
+.triggerAction({
+    matches: 'Contact.ReadAloud'
+})
+.cancelAction('cancelCreateContact', "Contact canceled.", {
+    matches: /^(cancel|nevermind)/i,
+    confirmPrompt: "Are you sure?"
+});
