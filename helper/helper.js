@@ -1,5 +1,5 @@
 // Helper function to count the number of notes stored in session.userData.notes
-module.exports = function noteCount(notes) {
+exports.noteCount = function(notes) {
 
     var i = 0;
     for (var name in notes) {
