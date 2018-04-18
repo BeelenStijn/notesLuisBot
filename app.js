@@ -110,6 +110,8 @@ var readNote = require('./dialogs/note/readNote');
 var createContact = require('./dialogs/contact/createContact');
 var deleteContact = require('./dialogs/contact/deleteContact');
 var readContact = require('./dialogs/contact/readContact');
+var showShirts = require('./dialogs/shirt/showShirts');
+var buyShirt = require('./dialogs/shirt/buyShirt');
 
 // CreateNote dialog
 bot.dialog('CreateNote', createNote)
@@ -170,3 +172,15 @@ bot.dialog('deleteContact', deleteContact)
     matches: /^(cancel|nevermind)/i,
     confirmPrompt: "Are you sure?"
 });
+
+// Carousel of hero cards
+bot.dialog('showShirts', showShirts)
+.triggerAction({
+    matches: /^(show|list)/i
+})
+
+// buy shirt dialog
+bot.dialog('buyButtonClick', buyShirt)
+.triggerAction({
+    matches: /(buy|add)\s.*shirt/i
+})
