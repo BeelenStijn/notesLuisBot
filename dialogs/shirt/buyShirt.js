@@ -40,6 +40,10 @@ module.exports = [
         session.userData.cart.push(item);
 
         // Send confirmation to users
-        session.send("A '%(size)s %(product)s' has been added to your cart.", item).endDialog();
+        session.sendTyping();
+        setTimeout(function(){
+            session.send("A '%(size)s %(product)s' has been added to your cart.", item).endDialog();
+        }, 1000);
+        
     }
 ]
