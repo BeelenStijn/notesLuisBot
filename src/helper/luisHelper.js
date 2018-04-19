@@ -1,5 +1,5 @@
 // function for setting the LUIS app for analysing text
-var setLuisRecognizer = function(language) {
+exports.setLuisRecognizer = function(language) {
     switch (language) {
         case "en":
             bot.recognizer(recognizerEn);
@@ -14,7 +14,7 @@ var setLuisRecognizer = function(language) {
 }
 
 // function for setting language to nl if api wrongfully detects nl
-var checkLanguage = function(language) {
+exports.checkLanguage = function(language) {
     if (language === "no" || language === "de") {
         return "nl";
     }

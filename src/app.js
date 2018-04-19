@@ -37,8 +37,8 @@ bot.use({
                     if (body.documents && body.documents.length > 0) {
                         var languages = body.documents[0].detectedLanguages;
                         if (languages && languages.length > 0) {
-                            event.textLocale = checkLanguage(languages[0].iso6391Name);
-                            setLuisRecognizer(event.textLocale);
+                            event.textLocale = luisHelper.checkLanguage(languages[0].iso6391Name);
+                            luisHelper.setLuisRecognizer(event.textLocale);
                         }
                     }
                 }
@@ -50,29 +50,6 @@ bot.use({
         }
     }
 });
-
-// function for setting the LUIS app for analysing text
-var setLuisRecognizer = function(language) {
-    switch (language) {
-        case "en":
-            bot.recognizer(recognizerEn);
-            break;
-        case "nl":
-            bot.recognizer(recognizerNl);
-            break;
-        case "fr":
-            bot.recognizer(recognizerFr);
-            break;
-    }
-}
-
-// function for setting language to nl if api wrongfully detects nl
-var checkLanguage = function(language) {
-    if (language === "no" || language === "de") {
-        return "nl";
-    }
-    return language;
-}
 
 // Add a dialog for each intent that the LUIS app recognizes.
 // See https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-recognize-intent-luis 
