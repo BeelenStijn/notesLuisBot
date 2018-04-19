@@ -37,8 +37,6 @@ module.exports = function () {
     // match any intents handled by other dialogs.
     global.bot = new builder.UniversalBot(connector, function (session, args) {
 
-            //NEW CODE
-
             session.send("Hi... I'm the note bot sample. I can create new notes, read saved notes to you and delete notes.");
 
             // If the object for storing notes in session.userData doesn't exist yet, initialize it
@@ -52,9 +50,7 @@ module.exports = function () {
                 console.log("initializing userData.notes in default message handler");
             }
 
-            // END OF NEW CODE
-
-        }, //{
+        }//, {
         //     localizerSettings: {
         //         defaultLocale: "en"
         //     }
