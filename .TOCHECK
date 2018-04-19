@@ -1,0 +1,18 @@
+Localization:
+    Use API
+    - Check once per user + save language in userData -> make user manually change language
+        Allows 5000 new users per month
+        Allows 25000 new users per month, 806 a day (31 days a month)
+    - Check once per conversation + save language in userData
+        Allows 5000 conversation per month, 160 each day (31 days a month), 11 new conversations each hour (0800 - 2200)
+        Allows 25000 conversation per month, 806 each day (31 days a month), 57 new conversation each hour (0800 - 2200)
+    - Check every message (works most intuitive)
+        Allows 5000 messages a month (not enough)
+        Allows 25000 messages a month (not enough)
+    Don't use API
+    - Check with every message BUT train models very deep
+
+
+    FREE
+    € 63.01
+    € 210.71

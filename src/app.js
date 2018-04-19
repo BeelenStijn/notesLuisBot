@@ -82,7 +82,7 @@ var luisAPIKey = process.env.LuisAPIKey;
 var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
 
 const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v2.0/apps/' + luisAppId + '?subscription-key=' + luisAPIKey;
-const LuisModelUrlNl = '';
+const LuisModelUrlNl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/06ead170-b977-4e29-a058-8c70c6c97a89?subscription-key=3ecdb93e6ba04a0187d3b05c95259381&verbose=true&timezoneOffset=60&q=';
 const LuisModelUrlFR = '';
 //const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/88c1bfea-58e8-41cb-9a47-6660f6c01360?subscription-key=3ecdb93e6ba04a0187d3b05c95259381&verbose=true&timezoneOffset=0&q='
 
@@ -151,7 +151,9 @@ var checkLanguage = function(language) {
 // See https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-recognize-intent-luis 
 bot.dialog('GreetingDialog',
     (session) => {
+        console.log("session.preferredLocale: " + session.preferredLocale());
         session.send('You reached the Greeting intent. You said \'%s\'.', session.message.text);
+        session.send("greeting");
         session.endDialog();
     }
 ).triggerAction({
