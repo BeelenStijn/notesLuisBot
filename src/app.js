@@ -5,11 +5,8 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
 }
 
-var restify = require('restify');
-var builder = require('botbuilder');
-var botbuilder_azure = require("botbuilder-azure");
 var request = require('request');
-
+var luisHelper = require('./helper/luisHelper');
 var createNote = require('./dialogs/note/createNote');
 var deleteNote = require('./dialogs/note/deleteNote');
 var readNote = require('./dialogs/note/readNote');
@@ -19,78 +16,8 @@ var readContact = require('./dialogs/contact/readContact');
 var showShirts = require('./dialogs/shirt/showShirts');
 var buyShirt = require('./dialogs/shirt/buyShirt');
 
-// Setup Restify Server
-var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
-  
-// Create chat connector for communicating with the Bot Framework Service
-var connector = new builder.ChatConnector({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword,
-    openIdMetadata: process.env.BotOpenIdMetadata 
-});
-
-// Listen for messages from users 
-server.post('/api/messages', connector.listen());
-
-/*----------------------------------------------------------------------------------------
-* Bot Storage: This is a great spot to register the private state storage for your bot. 
-* We provide adapters for Azure Table, CosmosDb, SQL Azure, or you can implement your own!
-* For samples and documentation, see: https://github.com/Microsoft/BotBuilder-Azure
-* ---------------------------------------------------------------------------------------- */
-
-var tableName = 'botdata';
-var azureTableClient = new botbuilder_azure.AzureTableClient(tableName, process.env['AzureWebJobsStorage']);
-var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azureTableClient);
-
-// Create your bot with a function to receive messages from the user
-// This default message handler is invoked if the user's utterance doesn't
-// match any intents handled by other dialogs.
-var bot = new builder.UniversalBot(connector, function (session, args) {
-
-    //NEW CODE
-
-   session.send("Hi... I'm the note bot sample. I can create new notes, read saved notes to you and delete notes.");
-
-   // If the object for storing notes in session.userData doesn't exist yet, initialize it
-   if (!session.userData.notes) {
-       session.userData.notes = {};
-       console.log("initializing userData.notes in default message handler");
-   }
-   // If the object for storing contacts in session.userData doesn't exist yet, initialize it
-   if (!session.userData.contacts) {
-       session.userData.contacts = {};
-       console.log("initializing userData.notes in default message handler");
-   }
-   
-   // END OF NEW CODE
-   
-}, //{
-//     localizerSettings: {
-//         defaultLocale: "en"
-//     }
-// }
-);
-
-bot.set('storage', tableStorage);
-
-// Make sure you add code to validate these fields
-var luisAppId = process.env.LuisAppId;
-var luisAPIKey = process.env.LuisAPIKey;
-var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
-
-const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v2.0/apps/' + luisAppId + '?subscription-key=' + luisAPIKey;
-const LuisModelUrlNl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/06ead170-b977-4e29-a058-8c70c6c97a89?subscription-key=3ecdb93e6ba04a0187d3b05c95259381&verbose=true&timezoneOffset=60&q=';
-const LuisModelUrlFR = '';
-//const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/88c1bfea-58e8-41cb-9a47-6660f6c01360?subscription-key=3ecdb93e6ba04a0187d3b05c95259381&verbose=true&timezoneOffset=0&q='
-
-// Create a recognizer that gets intents from LUIS, and add it to the bot
-var recognizerEn = new builder.LuisRecognizer(LuisModelUrl);
-var recognizerNl = new builder.LuisRecognizer(LuisModelUrlNl);
-var recognizerFr = new builder.LuisRecognizer(LuisModelUrlFR);
-bot.recognizer(recognizerEn);
+require('./setup/connectorSetup.js')();
+require('./setup/luisSetup.js')();
 
 
 bot.use({
