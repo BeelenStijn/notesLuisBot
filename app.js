@@ -7,17 +7,17 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // bot setup
-require('./setup/connectorSetup.js')();
+require('./src/setup/connectorSetup.js')();
 // setup for all the luis models
-require('./setup/luisSetup.js')();
+require('./src/setup/luisSetup.js')();
 // checking language on each message
-require('./helper/languageHelper')();
+require('./src/helper/languageHelper')();
 // dialogs
 // standard dialogs (greeting, cancel, help)
-require('./dialogs/standardDialogs')();
+require('./src/dialogs/standardDialogs')();
 // note dialogs (create, read, delete)
-require('./dialogs/note/noteDialogs')();
+require('./src/dialogs/note/noteDialogs')();
 // contact dialogs (create, read, delete)
-require('./dialogs/contact/contactDialogs')();
+require('./src/dialogs/contact/contactDialogs')();
 // shirt dialogs (show, buy)
-require('./dialogs/shirt/shirtDialogs')();
+require('./src/dialogs/shirt/shirtDialogs')();

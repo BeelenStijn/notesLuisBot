@@ -2,7 +2,7 @@
   "name": "luisbot",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/app.js",
+  "main": "app.js",
   "dependencies": {
     "botbuilder": "^3.14.1",
     "botbuilder-azure": "^3.0.4",
