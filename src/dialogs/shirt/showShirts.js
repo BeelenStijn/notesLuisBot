@@ -89,10 +89,10 @@ module.exports = function(session) {
                 ]
         }
     });*/
-    /*builder.Prompts.text(session, 'Are you sure that you want to cancel this transaction?', {            
+    builder.Prompts.text(session, 'Are you sure that you want to cancel this transaction?', {            
         speak: 'Are you <emphasis level=\"moderate\">sure</emphasis> that you want to cancel this transaction?',
         retrySpeak: 'Are you <emphasis level=\"moderate\">sure</emphasis> that you want to cancel this transaction?',
         inputHint: builder.InputHint.expectingInput
-    });*/
+    });
     session.send(msg).endDialog();
 }

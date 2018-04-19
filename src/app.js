@@ -8,6 +8,16 @@ if (process.env.NODE_ENV !== 'production') {
 var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
+var request = require('request');
+
+var createNote = require('./dialogs/note/createNote');
+var deleteNote = require('./dialogs/note/deleteNote');
+var readNote = require('./dialogs/note/readNote');
+var createContact = require('./dialogs/contact/createContact');
+var deleteContact = require('./dialogs/contact/deleteContact');
+var readContact = require('./dialogs/contact/readContact');
+var showShirts = require('./dialogs/shirt/showShirts');
+var buyShirt = require('./dialogs/shirt/buyShirt');
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -57,7 +67,12 @@ var bot = new builder.UniversalBot(connector, function (session, args) {
    
    // END OF NEW CODE
    
-});
+}, //{
+//     localizerSettings: {
+//         defaultLocale: "en"
+//     }
+// }
+);
 
 bot.set('storage', tableStorage);
 
@@ -67,11 +82,70 @@ var luisAPIKey = process.env.LuisAPIKey;
 var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
 
 const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v2.0/apps/' + luisAppId + '?subscription-key=' + luisAPIKey;
+const LuisModelUrlNl = '';
+const LuisModelUrlFR = '';
 //const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/88c1bfea-58e8-41cb-9a47-6660f6c01360?subscription-key=3ecdb93e6ba04a0187d3b05c95259381&verbose=true&timezoneOffset=0&q='
 
 // Create a recognizer that gets intents from LUIS, and add it to the bot
-var recognizer = new builder.LuisRecognizer(LuisModelUrl);
-bot.recognizer(recognizer);
+var recognizerEn = new builder.LuisRecognizer(LuisModelUrl);
+var recognizerNl = new builder.LuisRecognizer(LuisModelUrlNl);
+var recognizerFr = new builder.LuisRecognizer(LuisModelUrlFR);
+bot.recognizer(recognizerEn);
+
+
+bot.use({
+    receive: function (event, next) {
+    if (event.text /*&& !event.textLocale*/) {
+            var options = {
+                method: 'POST',
+                url: 'https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.0/languages?numberOfLanguagesToDetect=1',
+                body: { documents: [{ id: 'message', text: event.text }]},
+                json: true,
+                headers: {
+                    'Ocp-Apim-Subscription-Key': '3118554414be457fad6d4094ccfdfe12'
+                }
+            };
+            request(options, function (error, response, body) {
+                if (!error && body) {
+                    if (body.documents && body.documents.length > 0) {
+                        var languages = body.documents[0].detectedLanguages;
+                        if (languages && languages.length > 0) {
+                            event.textLocale = checkLanguage(languages[0].iso6391Name);
+                            setLuisRecognizer(event.textLocale);
+                        }
+                    }
+                }
+                console.log("BOT DETECTED LANGUAGE " + event.textLocale);
+                next();
+            });
+        } else {
+            next();
+        }
+    }
+});
+
+// function for setting the LUIS app for analysing text
+var setLuisRecognizer = function(language) {
+    switch (language) {
+        case "en":
+            bot.recognizer(recognizerEn);
+            break;
+        case "nl":
+            bot.recognizer(recognizerNl);
+            break;
+        case "fr":
+            bot.recognizer(recognizerFr);
+            break;
+    }
+}
+
+// function for setting language to nl if api wrongfully detects nl
+var checkLanguage = function(language) {
+    if (language === "no" || language === "de") {
+        return "nl";
+    }
+    return language;
+}
 
 // Add a dialog for each intent that the LUIS app recognizes.
 // See https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-recognize-intent-luis 
@@ -104,14 +178,6 @@ bot.dialog('CancelDialog',
 
 // NEW CODE
 
-var createNote = require('./dialogs/note/createNote');
-var deleteNote = require('./dialogs/note/deleteNote');
-var readNote = require('./dialogs/note/readNote');
-var createContact = require('./dialogs/contact/createContact');
-var deleteContact = require('./dialogs/contact/deleteContact');
-var readContact = require('./dialogs/contact/readContact');
-var showShirts = require('./dialogs/shirt/showShirts');
-var buyShirt = require('./dialogs/shirt/buyShirt');
 
 // CreateNote dialog
 bot.dialog('CreateNote', createNote)
