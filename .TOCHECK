@@ -9,6 +9,7 @@ Localization:
     - Check every message (works most intuitive)
         Allows 5000 messages a month (not enough)
         Allows 25000 messages a month (not enough)
+        
     Don't use API
     - Check with every message BUT train models very deep
 
