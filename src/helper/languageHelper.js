@@ -1,6 +1,9 @@
 var request = require('request');
 var luisHelper = require('./luisHelper');
 
+/**
+ * function to check language every time a user sends a message to the bot
+ */
 module.exports = function () {
     bot.use({
         receive: function (event, next) {

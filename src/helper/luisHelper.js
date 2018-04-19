@@ -1,4 +1,7 @@
-// function for setting the LUIS app for analysing text
+/**
+ * function for setting the LUIS app for analysing text
+ * @param {*} language the incoming language to set the recogniser for
+ */
 exports.setLuisRecognizer = function(language) {
     switch (language) {
         case "en":
@@ -13,7 +16,10 @@ exports.setLuisRecognizer = function(language) {
     }
 }
 
-// function for setting language to nl if api wrongfully detects nl
+/**
+ * function for setting language to nl if api wrongfully detects nl
+ * @param {*} language incoming language to check if dutch is wrongfully recognised
+ */
 exports.checkLanguage = function(language) {
     if (language === "no" || language === "de") {
         return "nl";

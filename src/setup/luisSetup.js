@@ -5,6 +5,7 @@ module.exports = function () {
     var luisAPIKey = process.env.LuisAPIKey;
     var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
 
+    // model url setup
     const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v2.0/apps/' + luisAppId + '?subscription-key=' + luisAPIKey;
     const LuisModelUrlNl = 'https://' + luisAPIHostName + '/luis/v2.0/apps/' + luisAppIdNl + '?subscription-key=' + luisAPIKey;
     const LuisModelUrlFR = '';
