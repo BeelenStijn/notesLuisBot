@@ -2,8 +2,11 @@ var builder = require('botbuilder');
 
 module.exports = function(session) {
     var msg = new builder.Message(session);
+    // set the layout of the message to carousel
     msg.attachmentLayout(builder.AttachmentLayout.carousel)
+    //attach the heroCards to the message
     msg.attachments([
+        // create heroCard
         new builder.HeroCard(session)
             .title("Classic White T-Shirt")
             .subtitle("100% Soft and Luxurious Cotton")
@@ -12,6 +15,7 @@ module.exports = function(session) {
             .buttons([
                 builder.CardAction.imBack(session, "buy classic white t-shirt", "Buy")
             ]),
+        // create heroCard
         new builder.HeroCard(session)
             .title("Classic Black T-Shirt")
             .subtitle("100% Soft and Luxurious Cotton")
