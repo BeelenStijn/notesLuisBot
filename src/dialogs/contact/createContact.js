@@ -48,6 +48,7 @@ module.exports =  [
         session.userData.contacts[contact.name] = contact;
 
         // send confirmation to user
-        session.endDialog("contact_created", contact.name, contact.number);
+        // session.endDialog("contact_created", contact.name, contact.number);
+        session.endConversation("contact_created", contact.name, contact.name);
     }
 ]
