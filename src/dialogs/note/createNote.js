@@ -45,6 +45,7 @@ module.exports = [
         session.userData.notes[note.title] = note;
 
         // Send confirmation to user
-        session.endDialog("note_created", note.title, note.text);
+        // session.endDialog("note_created", note.title, note.text);
+        session.endConversation("note_created", note.title, note.text);
     }
 ]
