@@ -1,5 +1,5 @@
 {
-    "greeting": ["Greetings traveler!", "Hello there!", "Howdy cowboy!"],
+    "greeting": ["Greetings traveler!", "Hello there!", "Howdy cowboy!", "Hello princes"],
     "sample": "Hi, I'm the notes contacts shirts bot. I can create delete and read notes and contacts and I can show you t-shirts!",
     "help": "you asked for help, I'm sorry but I can't help you",
     "cancel": "you cancelled, don't you like me?",
