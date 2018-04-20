@@ -16,14 +16,14 @@ module.exports = [
             };
             if (!item.size) {
                 // Prompt for size
-                builder.Prompts.choice(session, "What size would you like?", "Small|Medium|Large|Extra Large");
+                builder.Prompts.choice(session, "size_shirt", "Small|Medium|Large|Extra Large");
             } else {
                 //Skip to next waterfall step
                 next();
             }
         } else {
             // Invalid product
-            session.send("I'm sorry... That product wasn't found.").endDialog();
+            session.send("shirt_not_found").endDialog();
         }   
     },
     function (session, results) {
@@ -42,7 +42,7 @@ module.exports = [
         // Send confirmation to users
         session.sendTyping();
         setTimeout(function(){
-            session.send("A '%(size)s %(product)s' has been added to your cart.", item).endDialog();
+            session.send("shirt_added", item).endDialog();
         }, 1000);
         
     }

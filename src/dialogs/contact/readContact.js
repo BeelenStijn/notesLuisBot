@@ -16,16 +16,16 @@ module.exports = [
 
             //promt for contact name
             if (!name) {
-                builder.Prompts.choice(session, 'Which contact would you like to read?', session.userData.contacts);
+                builder.Prompts.choice(session, "read_contact", session.userData.contacts);
             } else {
                 next({ response: title });
             }
 
         } else {
-            session.endDialog("No contacts to read.")
+            session.endDialog("no_read_contact")
         }
     }, 
     function (session, results) {
-        session.endDialog("Here's your contact named '%s': '%s'.", results.response.entity, session.userData.contacts[results.response.entity].number);
+        session.endDialog("contact_read", results.response.entity, session.userData.contacts[results.response.entity].number);
     }
 ]

@@ -6,7 +6,6 @@ module.exports = function () {
     bot.dialog('GreetingDialog',
         (session) => {
             console.log("session.preferredLocale: " + session.preferredLocale());
-            session.send('You reached the Greeting intent. You said \'%s\'.', session.message.text);
             session.send("greeting");
             session.endDialog();
         }
@@ -17,7 +16,7 @@ module.exports = function () {
     // dialog for when user asked for help
     bot.dialog('HelpDialog',
         (session) => {
-            session.send('You reached the Help intent. You said \'%s\'.', session.message.text);
+            session.send("help");
             session.endDialog();
         }
     ).triggerAction({
@@ -27,7 +26,7 @@ module.exports = function () {
     // dialog for when user cancelled
     bot.dialog('CancelDialog',
         (session) => {
-            session.send('You reached the Cancel intent. You said \'%s\'.', session.message.text);
+            session.send("cancel");
             session.endDialog();
         }
     ).triggerAction({

@@ -15,16 +15,16 @@ module.exports = [
             
             // Prompt for note name
             if (!title) {
-                builder.Prompts.choice(session, 'Which note would you like to delete?', session.userData.notes);
+                builder.Prompts.choice(session, "delete_note", session.userData.notes);
             } else {
                 next({ response: title });
             }
         } else {
-            session.endDialog("No notes to delete.");
+            session.endDialog("no_delete_note");
         }
     },
     function (session, results) {
         delete session.userData.notes[results.response.entity];        
-        session.endDialog("Deleted the '%s' note.", results.response.entity);
+        session.endDialog("note_deleted", results.response.entity);
     }
 ]

@@ -7,11 +7,11 @@ module.exports = function () {
     bot.dialog('CreateNote', createNote)
         .triggerAction({
             matches: 'Note.Create',
-            confirmPrompt: "This will cancel the creation of the note you started. Are you sure?"
+            confirmPrompt: "create_cancel_note"
         })
-        .cancelAction('cancelCreateNote', "Note canceled.", {
+        .cancelAction('cancelCreateNote', "note_canceled", {
             matches: /^(cancel|nevermind)/i,
-            confirmPrompt: "Are you sure?"
+            confirmPrompt: "confirm_prompt"
         });
 
     // Delete note dialog
@@ -19,8 +19,9 @@ module.exports = function () {
         .triggerAction({
             matches: 'Note.Delete'
         })
-        .cancelAction('cancelDeleteNote', "Ok - canceled note deletion.", {
-            matches: /^(cancel|nevermind)/i
+        .cancelAction('cancelDeleteNote', "note_delete_canceled", {
+            matches: /^(cancel|nevermind)/i,
+            confirmPrompt: "confirm_prompt"
         });
 
     // Read note dialog
@@ -28,7 +29,8 @@ module.exports = function () {
         .triggerAction({
             matches: 'Note.ReadAloud'
         })
-        .cancelAction('cancelReadNote', "Ok.", {
-            matches: /^(cancel|nevermind)/i
+        .cancelAction('cancelReadNote', "note_read_canceled", {
+            matches: /^(cancel|nevermind)/i,
+            confirmPrompt: "confirm_prompt"
         });
 }

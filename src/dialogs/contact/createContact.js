@@ -14,7 +14,7 @@ module.exports =  [
 
         // prompt for name if name is not yet given
         if(!contact.name) {
-            builder.Prompts.text(session, 'What would you like to call your new contact?')
+            builder.Prompts.text(session, "name_new_contact")
         } else {
             next();
         }
@@ -27,7 +27,7 @@ module.exports =  [
 
         //prompt for the phone number of the contact (if not yet given)
         if (!contact.number) {
-            builder.Prompts.text(session, 'What phone number would you like to give to this contact');
+            builder.Prompts.text(session, "phone_new_contact");
         } else {
             next();
         }
@@ -48,6 +48,6 @@ module.exports =  [
         session.userData.contacts[contact.name] = contact;
 
         // send confirmation to user
-        session.endDialog('Creating contact named "%s" with number "%s"', contact.name, contact.number);
+        session.endDialog("contact_created", contact.name, contact.number);
     }
 ]

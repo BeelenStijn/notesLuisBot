@@ -7,11 +7,11 @@ module.exports = function () {
     bot.dialog('createContact', createContact)
         .triggerAction({
             matches: 'Contact.Create',
-            confirmPrompt: "This will cancel the creation of the contact you started. Are you sure?"
+            confirmPrompt: "create_cancel_contact"
         })
-        .cancelAction('cancelCreateContact', "Contact canceled.", {
+        .cancelAction('cancelCreateContact', "contact_canceled", {
             matches: /^(cancel|nevermind)/i,
-            confirmPrompt: "Are you sure?"
+            confirmPrompt: "confirm_prompt"
         });
 
     // Read contact dialog
@@ -19,9 +19,9 @@ module.exports = function () {
         .triggerAction({
             matches: 'Contact.ReadAloud'
         })
-        .cancelAction('cancelReadContact', "Reading contact canceled.", {
+        .cancelAction('cancelReadContact', "read_contact_canceled", {
             matches: /^(cancel|nevermind)/i,
-            confirmPrompt: "Are you sure?"
+            confirmPrompt: "confirm_prompt"
         });
 
     // Delete contact dialog
@@ -29,8 +29,8 @@ module.exports = function () {
         .triggerAction({
             matches: 'Contact.Delete'
         })
-        .cancelAction('cancelDeleteContact', "Deleting contact canceled.", {
+        .cancelAction('cancelDeleteContact', "delete_contact_canceled", {
             matches: /^(cancel|nevermind)/i,
-            confirmPrompt: "Are you sure?"
+            confirmPrompt: "confirm_prompt"
         });
 }

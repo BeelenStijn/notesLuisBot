@@ -16,16 +16,16 @@ module.exports = [
 
             //promt for contact name
             if (!name) {
-                builder.Prompts.choice(session, 'Which contact would you like to delete?', session.userData.contacts);
+                builder.Prompts.choice(session, "delete_contact", session.userData.contacts);
             } else {
                 next({ response: title });
             }
         } else {
-            session.endDialog("No contacts to delete.")
+            session.endDialog("no_delete_contact");
         }
     },
     function (session, results) {
         delete session.userData.contacts[results.response.entity];
-        session.endDialog("Deleted the '%s' contact.", results.response.entity);
+        session.endDialog("contact_deleted", results.response.entity);
     }
 ]

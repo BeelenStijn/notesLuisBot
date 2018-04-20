@@ -16,15 +16,15 @@ module.exports = [
             
             // Prompt for note name
             if (!title) {
-                builder.Prompts.choice(session, 'Which note would you like to read?', session.userData.notes);
+                builder.Prompts.choice(session, "read_note", session.userData.notes);
             } else {
                 next({ response: title });
             }
         } else {
-            session.endDialog("No notes to read.");
+            session.endDialog("no_read_note");
         }
     },
     function (session, results) {        
-        session.endDialog("Here's the '%s' note: '%s'.", results.response.entity, session.userData.notes[results.response.entity].text);
+        session.endDialog("note_read", results.response.entity, session.userData.notes[results.response.entity].text);
     }
 ]

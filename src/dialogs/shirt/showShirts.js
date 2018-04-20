@@ -13,7 +13,7 @@ module.exports = function(session) {
             .text("Price is $25 and carried in sizes (S, M, L, and XL)")
             .images([builder.CardImage.create(session, 'https://petersapparel.parseapp.com/img/whiteshirt.png')])
             .buttons([
-                builder.CardAction.imBack(session, "buy classic white t-shirt", "Buy")
+                builder.CardAction.imBack(session, "buy_shirt_white", "Buy")
             ]),
         // create heroCard
         new builder.HeroCard(session)
@@ -22,7 +22,7 @@ module.exports = function(session) {
             .text("Price is $25 and carried in sizes (S, M, L, and XL)")
             .images([builder.CardImage.create(session, 'https://petersapparel.parseapp.com/img/grayshirt.png')])
             .buttons([
-                builder.CardAction.imBack(session, "buy classic gray t-shirt", "Buy")
+                builder.CardAction.imBack(session, "buy_shirt_gray", "Buy")
             ])
     ]);
     // format for adaptive cards
