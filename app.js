@@ -12,7 +12,9 @@ require('./src/setup/connectorSetup.js')();
 require('./src/setup/luisSetup.js')();
 // checking language on each message
 require('./src/helper/languageHelper')();
+
 // dialogs
+
 // standard dialogs (greeting, cancel, help)
 require('./src/dialogs/standardDialogs')();
 // note dialogs (create, read, delete)
