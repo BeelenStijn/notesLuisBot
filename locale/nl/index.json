@@ -1,5 +1,5 @@
 {
-    "greeting": ["Hallo daar!", "Hallo", "Dag ploppertje", "Dag vriend"],
+    "greeting": ["Hallo daar!", "Hallo", "Dag ploppertje", "Dag vriend", "Dag beste vriend"],
     "sample": "Hallo, ik ben de bot die je kan helpen met het beheren van je contacten, notities. Ik kan je ook T-shirts tonen.",
     "help": "Je vroeg voor hulp, sorry maar ik kan jou niet helpen.",
     "cancel": "Je hebt gecanceld. Waarom? Ben ik niet leuk genoeg?",
